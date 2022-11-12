@@ -37,27 +37,7 @@ class HDBlurSphere:HDDamageHandler{
 		TNT1 A 0{
 			A_AddBlackout(256,72,8,16);
 			int lite=cursector.lightlevel;
-			if(
-				bspawnsoundsource
-				||(
-					invoker.intensity>0
-					&&invoker.intensity<99
-				)||lite>random(200,256)
-			){
-				if(lite>200)
-				{
 
-				array<string>msgs;msgs.clear();
-					string msg=Wads.ReadLump(Wads.CheckNumForName("blurspheretexts",0));
-            		msg.replace("\r", "");
-            		msg.split(msgs,"\n");
-            		msg=msgs[int(clamp(frandom(0.,1.)*msgs.size(),0,msgs.size()-1))];
-					A_Log(msg, true);
-				}
-				else A_Log("noise",true);
-				if(lite>random(230,300))invoker.amount--;
-				return;
-			}
 			if(!invoker.worn){
 				invoker.worn=true;
 				A_StartSound("blursphere/use",CHAN_BODY,CHANF_OVERLAP,
@@ -82,23 +62,6 @@ class HDBlurSphere:HDDamageHandler{
 		int tobreak,
 		int toaggravate
 	){
-		int badroll=damage*amount-random(0,99);
-		if(
-			badroll>0
-		){
-			badroll=max(1,badroll>>4);
-			if(
-				worn
-				&&random(1,255)<damage
-			){
-				amount-=badroll;
-			}else{
-				owner.A_DropInventory(getclassname(),badroll);
-			}
-			if(amount<1){
-				destroy();
-			}
-		}
 		if(!self||!owner)return damage,mod,flags,towound,toburn,tostun,tobreak,toaggravate;
 		if(
 			worn
@@ -169,40 +132,11 @@ class HDBlurSphere:HDDamageHandler{
 			){
 				intensity=-200;
 				worn=false;
-				if(
-					attacking
-					&&random(0,amount>>2+1)
-				){
-					if(!random(0,7))
-					{
-					array<string>msgs;msgs.clear();
-					string msg=Wads.ReadLump(Wads.CheckNumForName("blurspheretexts",0));
-            		msg.replace("\r", "");
-            		msg.split(msgs,"\n");
-            		msg=msgs[int(clamp(frandom(0.,1.)*msgs.size(),0,msgs.size()-1))];
-					owner.A_Log(msg, true);
-					};
-					amount--;
-					if(amount<1)return;
-				}
 			}else{
 				if(intensity<99)intensity=max(intensity+1,-135);
 			}
 		}else{
 			intensity=max(0,intensity-1);
-			if(
-				!intensity
-				&&lightbad
-				&&(
-					buttons&(BT_ATTACK|BT_ALTATTACK)
-					||!(level.time&(1|2|4|8|16|32))
-					||vel dot vel > 50-(amount<<2)
-				)
-			){
-				if(random(0,3))owner.A_Log("no",true);
-				owner.A_DropInventory(getclassname(),random(1,random(1,amount)));
-				return;
-			}
 		}
 		bool invi=true;
 		if(intensity<random(8,25)){
