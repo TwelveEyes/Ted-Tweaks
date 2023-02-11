@@ -539,12 +539,6 @@ class HDCasingBits:RandomSpawner{
 }
 class HDGoreBits:RandomSpawner{
 	default{
-		dropitem "DeadDemon",126,1;
-		dropitem "DeadDoomImp",126,1;
-		dropitem "DeadZombieMan",96,1;
-		dropitem "DeadShotgunGuy",96,1;
-		dropitem "DeadRifleman",96,1;
-		dropitem "ReallyDeadRifleman",46,1;
 		dropitem "ColonGibs",256,4;
 		dropitem "Gibs",256,6;
 		dropitem "SmallBloodPool",256,8;

@@ -32,7 +32,7 @@ class PainMonster:HDMobBase{
 // ------------------------------------------------------------
 // Pain Lord
 // ------------------------------------------------------------
-class PainLord:PainMonster replaces BaronofHell{
+class PainLord:PainMonster {
 	default{
 		height 64;
 		radius 17;

@@ -404,7 +404,7 @@ class ZombieSMGStormtrooper:ZombieStormTrooper{default{
 		accuracy 3;
 }}
 
-class ZombieHideousTrooper:RandomSpawner replaces ZombieMan{
+class ZombieHideousTrooper:RandomSpawner {
 	default{
 		dropitem "ZombieAutoStormtrooper",256,100;
 		dropitem "ZombieSemiStormtrooper",256,20;
@@ -412,7 +412,7 @@ class ZombieHideousTrooper:RandomSpawner replaces ZombieMan{
 		dropitem "EnemyHERP",256,1;
 	}
 }
-class DeadZombieStormtrooper:ZombieStormtrooper replaces DeadZombieMan{
+class DeadZombieStormtrooper:ZombieStormtrooper {
 	override void postbeginplay(){
 		super.postbeginplay();
 		A_Die("spawndead");
